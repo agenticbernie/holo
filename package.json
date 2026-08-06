@@ -1,0 +1,23 @@
+{
+  "name": "pipa",
+  "private": true,
+  "packageManager": "pnpm@11.8.0",
+  "scripts": {
+    "build": "turbo run build",
+    "check": "biome check .",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:integration": "pnpm --filter @pipa/api test:integration",
+    "openapi:validate": "pnpm --filter @pipa/api openapi:validate",
+    "dev": "pnpm --filter @pipa/api dev"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.7",
+    "turbo": "2.10.8",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10",
+    "wrangler": "4.119.0"
+  }
+}

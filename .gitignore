@@ -1,0 +1,7 @@
+.vibecode-backup*/
+node_modules/
+.turbo/
+.wrangler/
+apps/api/.dev.vars
+dist/
+.dev.vars

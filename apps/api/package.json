@@ -1,0 +1,34 @@
+{
+  "name": "@pipa/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "dev": "wrangler dev",
+    "openapi:validate": "tsx scripts/validate-openapi.ts"
+  },
+  "dependencies": {
+    "@hono/zod-openapi": "1.5.1",
+    "@pipa/application": "workspace:*",
+    "@pipa/config": "workspace:*",
+    "@pipa/contracts": "workspace:*",
+    "@pipa/database": "workspace:*",
+    "@pipa/domain": "workspace:*",
+    "@pipa/llm-client": "workspace:*",
+    "@pipa/storage": "workspace:*",
+    "@pipa/synthetic-generator": "workspace:*",
+    "@scalar/hono-api-reference": "0.11.12",
+    "hono": "4.13.0",
+    "yaml": "2.8.1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.20.2",
+    "@cloudflare/workers-types": "5.20260804.1",
+    "tsx": "4.20.6",
+    "vitest": "4.1.10"
+  }
+}

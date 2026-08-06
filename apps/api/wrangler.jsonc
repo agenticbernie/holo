@@ -1,0 +1,45 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "pipa-api",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-08-06",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "ENVIRONMENT": "development",
+    "KIMI_API_BASE_URL": "https://api.moonshot.ai/v1",
+    "KIMI_MODEL": "kimi-k2.6"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "pipa-db",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "../../packages/database/migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "DATASETS_BUCKET",
+      "bucket_name": "pipa-datasets"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "DATASET_QUEUE",
+        "queue": "pipa-dataset-generation"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "pipa-dataset-generation",
+        "max_batch_size": 1,
+        "max_batch_timeout": 5
+      }
+    ]
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
