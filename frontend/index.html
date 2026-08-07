@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pipa Dashboard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+      body {
+        background: #f0f2f5;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1300px;
+        margin: auto;
+      }
+      h1 {
+        color: #1a1a2e;
+        margin-bottom: 20px;
+        border-left: 5px solid #6c63ff;
+        padding-left: 15px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      }
+      .card h3 {
+        color: #1a1a2e;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #6c63ff;
+        padding-bottom: 10px;
+      }
+      .card label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+      }
+      .card input,
+      .card textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        margin-bottom: 10px;
+      }
+      button {
+        background: #6c63ff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      button:hover {
+        background: #5a52d5;
+      }
+      pre {
+        background: #f8f9fa;
+        padding: 12px;
+        border-radius: 6px;
+        max-height: 250px;
+        overflow: auto;
+        font-size: 13px;
+        border: 1px solid #eee;
+        margin-top: 10px;
+      }
+      .flex-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚀 Pipa - Hỗ trợ ra quyết định sản phẩm & KOC</h1>
+      <div class="grid">
+        <!-- 1. Đề xuất KOC -->
+        <div class="card">
+          <h3>👩‍💼 Đề xuất KOC</h3>
+          <label>SKU ID</label>
+          <input id="skuId" value="SKU001" placeholder="Nhập SKU..." />
+          <button onclick="getRecommendations()">Gợi ý KOC</button>
+          <pre id="kocResult">Chưa có dữ liệu</pre>
+        </div>
+
+        <!-- 2. Danh sách chiến dịch -->
+        <div class="card">
+          <h3>📋 Danh sách chiến dịch</h3>
+          <button onclick="getCampaigns()">Tải danh sách</button>
+          <pre id="campaignsResult">Chưa có dữ liệu</pre>
+        </div>
+
+        <!-- 3. Ghi nhận bài học -->
+        <div class="card">
+          <h3>📝 Ghi nhận bài học</h3>
+          <label>Campaign ID</label>
+          <input id="campaignId" placeholder="Nhập Campaign ID..." />
+          <label>Views</label>
+          <input id="views" type="number" value="1000" />
+          <label>Clicks</label>
+          <input id="clicks" type="number" value="100" />
+          <label>Orders</label>
+          <input id="orders" type="number" value="20" />
+          <label>Revenue</label>
+          <input id="revenue" type="number" value="5000000" />
+          <button onclick="saveResult()">Lưu kết quả</button>
+          <pre id="resultSave">Chưa có dữ liệu</pre>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const BASE = "http://127.0.0.1:8787";
+
+      // 1. Đề xuất KOC
+      async function getRecommendations() {
+        const skuId = document.getElementById("skuId").value.trim();
+        if (!skuId) return alert("Nhập SKU");
+        try {
+          const res = await fetch(`${BASE}/api/v1/recommendations`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ skuId, limit: 5 }),
+          });
+          const data = await res.json();
+          document.getElementById("kocResult").textContent = JSON.stringify(
+            data,
+            null,
+            2,
+          );
+        } catch (e) {
+          document.getElementById("kocResult").textContent =
+            "❌ Lỗi: " + e.message;
+        }
+      }
+
+      // 2. Danh sách chiến dịch
+      async function getCampaigns() {
+        try {
+          const res = await fetch(`${BASE}/api/v1/campaigns`);
+          const data = await res.json();
+          document.getElementById("campaignsResult").textContent =
+            JSON.stringify(data, null, 2);
+        } catch (e) {
+          document.getElementById("campaignsResult").textContent =
+            "❌ Lỗi: " + e.message;
+        }
+      }
+
+      // 3. Ghi nhận kết quả
+      async function saveResult() {
+        const id = document.getElementById("campaignId").value.trim();
+        if (!id) return alert("Nhập Campaign ID");
+        const payload = {
+          views: parseInt(document.getElementById("views").value) || 0,
+          clicks: parseInt(document.getElementById("clicks").value) || 0,
+          orders: parseInt(document.getElementById("orders").value) || 0,
+          revenue: parseInt(document.getElementById("revenue").value) || 0,
+        };
+        try {
+          const res = await fetch(`${BASE}/api/v1/campaigns/${id}/results`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json();
+          document.getElementById("resultSave").textContent = JSON.stringify(
+            data,
+            null,
+            2,
+          );
+        } catch (e) {
+          document.getElementById("resultSave").textContent =
+            "❌ Lỗi: " + e.message;
+        }
+      }
+
+      // Tải dữ liệu mặc định khi mở trang
+      window.onload = () => {
+        getCampaigns();
+      };
+    </script>
+  </body>
+</html>
