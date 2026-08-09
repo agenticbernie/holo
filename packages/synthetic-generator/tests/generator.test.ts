@@ -1,4 +1,4 @@
-import type { DatasetGenerationParameters } from "@pipa/domain";
+import type { DatasetGenerationParameters } from "@holo/domain";
 import { describe, expect, it } from "vitest";
 import { generateSyntheticDataset } from "../src/index";
 

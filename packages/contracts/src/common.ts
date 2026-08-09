@@ -23,7 +23,7 @@ export const errorResponseSchema = z
     }),
   })
   .openapi("ErrorResponse", {
-    description: "Cấu trúc lỗi thống nhất của Pipa.",
+    description: "Cấu trúc lỗi thống nhất của Holo.",
   });
 
 export const deletedResponseSchema = z.object({
@@ -38,7 +38,7 @@ export const pageMetaSchema = z.object({
 
 export const healthResponseSchema = z.object({
   status: z.literal("ok").openapi({ example: "ok" }),
-  service: z.literal("pipa-api").openapi({ example: "pipa-api" }),
+  service: z.literal("holo-api").openapi({ example: "holo-api" }),
   environment: z.string().openapi({ example: "development" }),
   requestId: z.string().openapi({ example: "req_01JEXAMPLE" }),
 });

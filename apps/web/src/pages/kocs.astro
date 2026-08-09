@@ -1,0 +1,10 @@
+---
+import HoloShell from "../components/HoloShell";
+import KocsPage from "../components/pages/KocsPage";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Holo — KOC">
+  <HoloShell currentPath="/kocs" client:load>
+    <KocsPage client:load />
+  </HoloShell>
+</BaseLayout>

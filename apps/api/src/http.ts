@@ -1,20 +1,21 @@
+import { healthResponseSchema } from "@holo/contracts";
+import { DomainError, InfrastructureError } from "@holo/domain";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { healthResponseSchema } from "@pipa/contracts";
-import { DomainError, InfrastructureError } from "@pipa/domain";
 import { apiReference } from "@scalar/hono-api-reference";
 import type { MiddlewareHandler } from "hono";
+import { cors } from "hono/cors";
 import { stringify as stringifyYaml } from "yaml";
 import { registerCampaignRoutes } from "./routes/campaigns";
 import { registerDatasetRoutes } from "./routes/datasets";
 import { registerKocRoutes } from "./routes/kocs";
 import { registerProductRoutes } from "./routes/products";
 import { registerRecommendationRoutes } from "./routes/recommendations";
-import type { AppDependencies, PipaEnv } from "./types";
+import type { AppDependencies, HoloEnv } from "./types";
 
 const openApiInfo = {
   openapi: "3.1.0" as const,
   info: {
-    title: "Pipa API",
+    title: "Holo API",
     version: "0.1.0",
     description: "API backend cho nền tảng đề xuất SKU-KOC và sinh dataset thời trang.",
   },
@@ -30,7 +31,7 @@ const errorResponse = (
   error: { code, message, ...(details === undefined ? {} : { details }), requestId },
 });
 
-const requestIdMiddleware: MiddlewareHandler<PipaEnv> = async (c, next): Promise<void> => {
+const requestIdMiddleware: MiddlewareHandler<HoloEnv> = async (c, next): Promise<void> => {
   const incoming = c.req.header("X-Request-ID");
   const requestId =
     incoming !== undefined && /^[a-zA-Z0-9._-]{1,100}$/.test(incoming)
@@ -54,8 +55,8 @@ const requestIdMiddleware: MiddlewareHandler<PipaEnv> = async (c, next): Promise
 export const createHttpApp = (
   dependencies: AppDependencies,
   environment: string,
-): OpenAPIHono<PipaEnv> => {
-  const app = new OpenAPIHono<PipaEnv>({
+): OpenAPIHono<HoloEnv> => {
+  const app = new OpenAPIHono<HoloEnv>({
     defaultHook: (result, c) => {
       if (!result.success) {
         return c.json(
@@ -67,6 +68,22 @@ export const createHttpApp = (
       }
     },
   });
+  app.use(
+    "*",
+    cors({
+      origin: (origin) =>
+        [
+          "http://localhost:4321",
+          "http://127.0.0.1:4321",
+          "https://holo-web.hackonteam.workers.dev",
+        ].includes(origin)
+          ? origin
+          : "",
+      allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "X-Request-ID"],
+      exposeHeaders: ["X-Request-ID"],
+    }),
+  );
   app.use("*", requestIdMiddleware);
   app.onError((error, c) => {
     const requestId = c.get("requestId");
@@ -107,7 +124,7 @@ export const createHttpApp = (
       tags: ["System"],
       operationId: "getHealth",
       summary: "Kiểm tra trạng thái API",
-      description: "Trả về trạng thái hoạt động cơ bản của Pipa API.",
+      description: "Trả về trạng thái hoạt động cơ bản của Holo API.",
       responses: {
         200: {
           description: "API đang hoạt động.",
@@ -117,7 +134,7 @@ export const createHttpApp = (
     },
     (c) =>
       c.json(
-        { status: "ok", service: "pipa-api", environment, requestId: c.get("requestId") },
+        { status: "ok", service: "holo-api", environment, requestId: c.get("requestId") },
         200,
       ),
   );
@@ -138,7 +155,7 @@ export const createHttpApp = (
     "/docs",
     apiReference({
       url: "/docs/openapi.json",
-      pageTitle: "Pipa API Documentation",
+      pageTitle: "Holo API Documentation",
     }),
   );
   return app;

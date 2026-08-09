@@ -1,4 +1,4 @@
-import type { DatasetQueueMessage } from "@pipa/application";
+import type { DatasetQueueMessage } from "@holo/application";
 import { createProductionDependencies } from "./composition";
 import { createHttpApp } from "./http";
 

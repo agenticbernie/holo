@@ -1,5 +1,4 @@
-import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
-import type { CampaignApplication } from "@pipa/application";
+import type { CampaignApplication } from "@holo/application";
 import {
   campaignPageSchema,
   campaignResultPageSchema,
@@ -12,12 +11,13 @@ import {
   idParamSchema,
   paginationQuerySchema,
   updateCampaignSchema,
-} from "@pipa/contracts";
+} from "@holo/contracts";
+import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
 import { campaignResponse, campaignResultResponse } from "../serializers";
-import type { PipaEnv } from "../types";
+import type { HoloEnv } from "../types";
 
 export const registerCampaignRoutes = (
-  app: OpenAPIHono<PipaEnv>,
+  app: OpenAPIHono<HoloEnv>,
   campaigns: CampaignApplication,
 ): void => {
   app.openapi(

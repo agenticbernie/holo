@@ -1,5 +1,5 @@
 {
-  "name": "@pipa/application",
+  "name": "@holo/application",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -12,10 +12,10 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@pipa/domain": "workspace:*",
-    "@pipa/llm-client": "workspace:*",
-    "@pipa/storage": "workspace:*",
-    "@pipa/synthetic-generator": "workspace:*",
+    "@holo/domain": "workspace:*",
+    "@holo/llm-client": "workspace:*",
+    "@holo/storage": "workspace:*",
+    "@holo/synthetic-generator": "workspace:*",
     "effect": "3.22.1"
   },
   "devDependencies": {

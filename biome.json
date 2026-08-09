@@ -14,7 +14,10 @@
       "biome.json",
       "apps/**",
       "packages/**",
-      "!apps/api/.wrangler"
+      "!apps/api/.wrangler",
+      "!apps/web/.astro",
+      "!apps/web/dist",
+      "!apps/web/**/*.astro"
     ]
   },
   "formatter": {

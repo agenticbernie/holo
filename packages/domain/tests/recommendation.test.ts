@@ -12,7 +12,7 @@ const product: Product = {
   name: "Minimal dress",
   description: "Test product",
   category: "dress",
-  brand: "Pipa",
+  brand: "Holo",
   sellingPrice: 800_000,
   stock: 100,
   styleTags: ["minimal", "summer"],

@@ -1,0 +1,10 @@
+---
+import HoloShell from "../components/HoloShell";
+import RecommendationsPage from "../components/pages/RecommendationsPage";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Holo — Đề xuất">
+  <HoloShell currentPath="/recommendations" client:load>
+    <RecommendationsPage client:load />
+  </HoloShell>
+</BaseLayout>

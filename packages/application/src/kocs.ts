@@ -7,7 +7,7 @@ import {
   type UpdateKocInput,
   validateCreateKoc,
   validateKocPatch,
-} from "@pipa/domain";
+} from "@holo/domain";
 import type { ApplicationRuntime } from "./common";
 
 export interface KocApplication {

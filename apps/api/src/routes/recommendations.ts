@@ -1,16 +1,16 @@
-import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
-import type { RecommendationApplication } from "@pipa/application";
+import type { RecommendationApplication } from "@holo/application";
 import {
   errorResponseSchema,
   recommendationRequestSchema,
   recommendationResponseSchema,
-} from "@pipa/contracts";
-import { defaultRecommendationWeights } from "@pipa/domain";
+} from "@holo/contracts";
+import { defaultRecommendationWeights } from "@holo/domain";
+import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
 import { recommendationResponse } from "../serializers";
-import type { PipaEnv } from "../types";
+import type { HoloEnv } from "../types";
 
 export const registerRecommendationRoutes = (
-  app: OpenAPIHono<PipaEnv>,
+  app: OpenAPIHono<HoloEnv>,
   recommendations: RecommendationApplication,
 ): void => {
   app.openapi(

@@ -1,0 +1,12 @@
+---
+import HoloShell from "../../components/HoloShell";
+import CampaignDetailPage from "../../components/pages/CampaignDetailPage";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const campaignId = Astro.params.id ?? "";
+---
+<BaseLayout title="Holo — Chi tiết chiến dịch">
+  <HoloShell currentPath="/campaigns" client:load>
+    <CampaignDetailPage campaignId={campaignId} client:load />
+  </HoloShell>
+</BaseLayout>

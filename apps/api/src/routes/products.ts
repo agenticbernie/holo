@@ -1,5 +1,4 @@
-import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
-import type { ProductApplication } from "@pipa/application";
+import type { ProductApplication } from "@holo/application";
 import {
   createProductSchema,
   deletedResponseSchema,
@@ -9,12 +8,13 @@ import {
   productPageSchema,
   productSchema,
   updateProductSchema,
-} from "@pipa/contracts";
+} from "@holo/contracts";
+import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
 import { productResponse } from "../serializers";
-import type { PipaEnv } from "../types";
+import type { HoloEnv } from "../types";
 
 export const registerProductRoutes = (
-  app: OpenAPIHono<PipaEnv>,
+  app: OpenAPIHono<HoloEnv>,
   products: ProductApplication,
 ): void => {
   app.openapi(

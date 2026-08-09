@@ -5,3 +5,6 @@ node_modules/
 apps/api/.dev.vars
 dist/
 .dev.vars
+.astro/
+playwright-report/
+test-results/

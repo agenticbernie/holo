@@ -1,4 +1,4 @@
-import type { SemanticKind, SemanticRecord } from "@pipa/llm-client";
+import type { SemanticKind, SemanticRecord } from "@holo/llm-client";
 import { SeededRandom } from "./random";
 
 const styles = ["minimal", "streetwear", "feminine", "workwear", "vintage", "resort"];

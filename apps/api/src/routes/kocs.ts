@@ -1,5 +1,4 @@
-import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
-import type { KocApplication } from "@pipa/application";
+import type { KocApplication } from "@holo/application";
 import {
   createKocSchema,
   deletedResponseSchema,
@@ -9,11 +8,12 @@ import {
   kocSchema,
   paginationQuerySchema,
   updateKocSchema,
-} from "@pipa/contracts";
+} from "@holo/contracts";
+import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
 import { kocResponse } from "../serializers";
-import type { PipaEnv } from "../types";
+import type { HoloEnv } from "../types";
 
-export const registerKocRoutes = (app: OpenAPIHono<PipaEnv>, kocs: KocApplication): void => {
+export const registerKocRoutes = (app: OpenAPIHono<HoloEnv>, kocs: KocApplication): void => {
   app.openapi(
     createRoute({
       method: "get",

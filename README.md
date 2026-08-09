@@ -1,6 +1,6 @@
-# Pipa Backend
+# Holo
 
-Pipa is a Cloudflare Workers backend for fashion e-commerce SKU-KOC recommendations and reproducible synthetic datasets.
+Holo is a Cloudflare Workers backend and Astro frontend for fashion e-commerce SKU-KOC recommendations and reproducible synthetic datasets.
 
 ## Architecture
 
@@ -15,6 +15,8 @@ The monorepo follows Clean Architecture:
 - `packages/llm-client`: Effect-based Kimi API client for semantic fields only.
 - `packages/synthetic-generator`: seeded deterministic numeric simulation and semantic fallback.
 - `packages/config`: runtime environment validation.
+- `apps/web`: Astro SSR frontend with React islands and Astryx UI.
+- `packages/api-client`: centralized Zod-validated browser API client.
 
 ## API Documentation
 
@@ -76,6 +78,7 @@ Copy `.dev.vars.example` to `.dev.vars` for local development. `KIMI_API_KEY` is
 - `KIMI_API_KEY` as a local variable or Wrangler secret
 - `KIMI_API_BASE_URL`
 - `KIMI_MODEL`
+- `PUBLIC_HOLO_API_BASE_URL` for the frontend API proxy target
 
 Never commit `.dev.vars` or production secrets.
 
@@ -83,9 +86,17 @@ Never commit `.dev.vars` or production secrets.
 
 ```bash
 pnpm install
-pnpm --filter @pipa/api exec wrangler types ../../worker-configuration.d.ts
-pnpm --filter @pipa/api dev
+pnpm --filter @holo/api exec wrangler types ../../worker-configuration.d.ts
+pnpm --filter @holo/api dev
 ```
+
+Start the Holo frontend separately:
+
+```bash
+pnpm dev:web
+```
+
+The frontend calls `https://holo-api.hackonteam.workers.dev` directly. The API allowlists the Holo web Worker and local Astro origins through CORS.
 
 Apply D1 migrations locally when working directly with Wrangler:
 
@@ -100,9 +111,10 @@ pnpm check
 pnpm typecheck
 pnpm test
 pnpm test:integration
+pnpm test:e2e
 pnpm build
 pnpm openapi:validate
-pnpm exec wrangler deploy --dry-run --config apps/api/wrangler.jsonc --outdir /tmp/pipa-worker-dist
+pnpm --filter @holo/web deploy:dry
 ```
 
 ## Deployment
@@ -115,9 +127,18 @@ pnpm exec wrangler d1 migrations apply pipa-db --remote --config apps/api/wrangl
 pnpm exec wrangler deploy --config apps/api/wrangler.jsonc
 ```
 
+Deploy the frontend Worker independently:
+
+```bash
+pnpm deploy:web
+```
+
+The frontend Worker is named `holo-web`. Astro builds `apps/web/dist/server/wrangler.json` and deploys that generated configuration.
+
 ## MVP Limitations
 
 - Authentication and authorization are intentionally outside the MVP scope.
+- The frontend is an internal operations console and does not implement authentication.
 - Recommendation scoring is a deterministic baseline, not a trained production ML model.
 - Kimi semantic enrichment is optional and does not rank KOCs or generate numeric metrics.
 - Production resource IDs, domains, rate limiting, and account-specific observability policies must be configured per deployment.

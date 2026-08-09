@@ -5,7 +5,7 @@ import {
   kocSchema,
   productSchema,
   recommendationSchema,
-} from "@pipa/contracts";
+} from "@holo/contracts";
 import type {
   Campaign,
   CampaignResult,
@@ -13,7 +13,7 @@ import type {
   Koc,
   Product,
   RecommendationScore,
-} from "@pipa/domain";
+} from "@holo/domain";
 
 export const productResponse = (product: Product) =>
   productSchema.parse({

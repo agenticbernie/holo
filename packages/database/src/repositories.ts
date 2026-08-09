@@ -14,7 +14,7 @@ import {
   type Product,
   type ProductRepository,
   type UpdateCampaignInput,
-} from "@pipa/domain";
+} from "@holo/domain";
 import { parseAudienceProfile, parseWarnings, serializeStringArray } from "./serialization";
 
 const databaseError = (operation: string, cause: unknown): InfrastructureError =>

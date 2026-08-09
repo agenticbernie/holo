@@ -4,11 +4,11 @@ import type {
   KocApplication,
   ProductApplication,
   RecommendationApplication,
-} from "@pipa/application";
-import type { CampaignResultRepository, DatasetJobRepository } from "@pipa/domain";
-import type { ArtifactStorage } from "@pipa/storage";
+} from "@holo/application";
+import type { CampaignResultRepository, DatasetJobRepository } from "@holo/domain";
+import type { ArtifactStorage } from "@holo/storage";
 
-export type PipaEnv = {
+export type HoloEnv = {
   Bindings: Env;
   Variables: {
     requestId: string;

@@ -1,0 +1,10 @@
+---
+import HoloShell from "../components/HoloShell";
+import ProductsPage from "../components/pages/ProductsPage";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Holo — Sản phẩm">
+  <HoloShell currentPath="/products" client:load>
+    <ProductsPage client:load />
+  </HoloShell>
+</BaseLayout>

@@ -1,0 +1,10 @@
+---
+import HoloShell from "../components/HoloShell";
+import DatasetsPage from "../components/pages/DatasetsPage";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Holo — Bộ dữ liệu">
+  <HoloShell currentPath="/datasets" client:load>
+    <DatasetsPage client:load />
+  </HoloShell>
+</BaseLayout>

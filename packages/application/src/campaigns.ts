@@ -11,7 +11,7 @@ import {
   type UpdateCampaignInput,
   validateCampaignPatch,
   validateCreateCampaign,
-} from "@pipa/domain";
+} from "@holo/domain";
 import type { ApplicationRuntime } from "./common";
 
 export interface CampaignApplication {

@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
-  "name": "pipa-api",
+  "name": "holo-api",
   "main": "src/worker.ts",
   "compatibility_date": "2026-08-06",
   "compatibility_flags": ["nodejs_compat"],
@@ -13,7 +13,7 @@
     {
       "binding": "DB",
       "database_name": "pipa-db",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "e3f5704d-2762-4adc-9053-aa5bfb67b0e9",
       "migrations_dir": "../../packages/database/migrations"
     }
   ],

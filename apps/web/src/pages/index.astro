@@ -1,0 +1,10 @@
+---
+import HoloShell from "../components/HoloShell";
+import OverviewPage from "../components/pages/OverviewPage";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Holo — Tổng quan">
+  <HoloShell currentPath="/" client:load>
+    <OverviewPage client:load />
+  </HoloShell>
+</BaseLayout>

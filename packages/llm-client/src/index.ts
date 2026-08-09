@@ -89,7 +89,7 @@ const parseResponse = (value: unknown, count: number): readonly SemanticRecord[]
 
 const promptFor = (request: SemanticGenerationRequest): string =>
   [
-    "Bạn là trợ lý dữ liệu cho nền tảng thời trang Pipa.",
+    "Bạn là trợ lý dữ liệu cho nền tảng thời trang Holo.",
     `Tạo đúng ${request.count} bản ghi loại ${request.kind}. Seed tham chiếu: ${request.seed}.`,
     'Chỉ trả về JSON có dạng {"records":[...]}, không markdown.',
     "Mỗi record phải có name, description, styleTags, targetAudience, bio, contentThemes, ageRange, genders, regions, interests, objective, season.",

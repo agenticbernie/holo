@@ -16,7 +16,7 @@ export const productSchema = z
     name: z.string().openapi({ example: "Váy lụa midi thanh lịch" }),
     description: z.string().openapi({ example: "Thiết kế nhẹ, phù hợp cho mùa hè." }),
     category: productCategorySchema.openapi({ example: "dress" }),
-    brand: z.string().openapi({ example: "Pipa Studio" }),
+    brand: z.string().openapi({ example: "Holo Studio" }),
     sellingPrice: z.number().positive().openapi({ example: 890000 }),
     stock: z.number().int().nonnegative().openapi({ example: 120 }),
     styleTags: z

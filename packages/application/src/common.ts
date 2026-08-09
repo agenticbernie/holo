@@ -1,4 +1,4 @@
-import type { Clock, IdGenerator, PageRequest } from "@pipa/domain";
+import type { Clock, IdGenerator, PageRequest } from "@holo/domain";
 
 export interface ApplicationRuntime {
   readonly clock: Clock;

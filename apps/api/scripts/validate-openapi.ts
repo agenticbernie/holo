@@ -6,7 +6,7 @@ const document = createHttpApp(
   "test",
 ).getOpenAPI31Document({
   openapi: "3.1.0",
-  info: { title: "Pipa API", version: "0.1.0" },
+  info: { title: "Holo API", version: "0.1.0" },
 });
 
 const requiredPaths = [

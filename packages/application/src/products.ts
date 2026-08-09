@@ -7,7 +7,7 @@ import {
   type UpdateProductInput,
   validateCreateProduct,
   validateProductPatch,
-} from "@pipa/domain";
+} from "@holo/domain";
 import type { ApplicationRuntime } from "./common";
 
 export interface ProductApplication {

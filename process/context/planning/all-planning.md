@@ -1,4 +1,4 @@
-# Pipa Planning Context
+# Holo Planning Context
 
 This repository is implemented incrementally by package and module. Plans should identify domain rules, application use cases, infrastructure ports, OpenAPI contracts, migrations, tests, and verification commands.
 

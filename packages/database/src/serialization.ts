@@ -1,4 +1,4 @@
-import type { AudienceProfile } from "@pipa/domain";
+import type { AudienceProfile } from "@holo/domain";
 
 export const serializeStringArray = (value: readonly string[]): string => JSON.stringify(value);
 

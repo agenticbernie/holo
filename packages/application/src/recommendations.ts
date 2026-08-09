@@ -7,7 +7,7 @@ import {
   type RecommendationScore,
   type RecommendationWeights,
   rankRecommendations,
-} from "@pipa/domain";
+} from "@holo/domain";
 
 export interface RecommendationInput {
   readonly skuId: string;

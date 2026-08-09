@@ -1,17 +1,17 @@
-import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
-import type { DatasetApplication } from "@pipa/application";
+import type { DatasetApplication } from "@holo/application";
 import {
   createDatasetJobSchema,
   datasetExportQuerySchema,
   datasetJobSchema,
   errorResponseSchema,
   idParamSchema,
-} from "@pipa/contracts";
+} from "@holo/contracts";
+import { createRoute, type OpenAPIHono } from "@hono/zod-openapi";
 import { datasetJobResponse } from "../serializers";
-import type { PipaEnv } from "../types";
+import type { HoloEnv } from "../types";
 
 export const registerDatasetRoutes = (
-  app: OpenAPIHono<PipaEnv>,
+  app: OpenAPIHono<HoloEnv>,
   datasets: DatasetApplication,
 ): void => {
   app.openapi(

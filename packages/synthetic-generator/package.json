@@ -1,5 +1,5 @@
 {
-  "name": "@pipa/synthetic-generator",
+  "name": "@holo/synthetic-generator",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -12,8 +12,8 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@pipa/domain": "workspace:*",
-    "@pipa/llm-client": "workspace:*",
+    "@holo/domain": "workspace:*",
+    "@holo/llm-client": "workspace:*",
     "effect": "3.22.1"
   },
   "devDependencies": {

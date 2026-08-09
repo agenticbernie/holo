@@ -5,17 +5,17 @@ import {
   createProductApplication,
   createRecommendationApplication,
   type DatasetQueue,
-} from "@pipa/application";
-import { loadRuntimeConfig } from "@pipa/config";
+} from "@holo/application";
+import { loadRuntimeConfig } from "@holo/config";
 import {
   createCampaignRepository,
   createCampaignResultRepository,
   createDatasetJobRepository,
   createKocRepository,
   createProductRepository,
-} from "@pipa/database";
-import { createKimiClient } from "@pipa/llm-client";
-import { createR2ArtifactStorage } from "@pipa/storage";
+} from "@holo/database";
+import { createKimiClient } from "@holo/llm-client";
+import { createR2ArtifactStorage } from "@holo/storage";
 import type { AppDependencies } from "./types";
 
 export const createProductionDependencies = (env: Env): AppDependencies => {

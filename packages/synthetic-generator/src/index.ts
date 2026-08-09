@@ -8,8 +8,8 @@ import {
   type Product,
   validateDatasetParameters,
   validateGeneratedDataset,
-} from "@pipa/domain";
-import type { KimiClient, SemanticRecord } from "@pipa/llm-client";
+} from "@holo/domain";
+import type { KimiClient, SemanticRecord } from "@holo/llm-client";
 import { Effect } from "effect";
 import { fallbackSemanticRecords } from "./fallback";
 import { SeededRandom } from "./random";
@@ -80,7 +80,7 @@ const productFrom = (
   name: semantic.name,
   description: semantic.description,
   category: random.pick(categories),
-  brand: random.pick(["Pipa Studio", "Mây Atelier", "Luma Wear", "Nắng Concept"]),
+  brand: random.pick(["Holo Studio", "Mây Atelier", "Luma Wear", "Nắng Concept"]),
   sellingPrice: random.pick([390_000, 590_000, 790_000, 890_000, 1_290_000]),
   stock: random.integer(80, 500),
   styleTags: semantic.styleTags,

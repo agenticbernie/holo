@@ -6,10 +6,10 @@ import {
   defaultDatasetParameters,
   NotFoundError,
   validateDatasetParameters,
-} from "@pipa/domain";
-import type { KimiClient } from "@pipa/llm-client";
-import type { ArtifactStorage, StoredArtifact } from "@pipa/storage";
-import { generateSyntheticDataset } from "@pipa/synthetic-generator";
+} from "@holo/domain";
+import type { KimiClient } from "@holo/llm-client";
+import type { ArtifactStorage, StoredArtifact } from "@holo/storage";
+import { generateSyntheticDataset } from "@holo/synthetic-generator";
 import { Effect } from "effect";
 import type { ApplicationRuntime } from "./common";
 

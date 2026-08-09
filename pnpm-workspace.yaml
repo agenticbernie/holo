@@ -6,5 +6,6 @@ onlyBuiltDependencies:
   - esbuild
   - workerd
 allowBuilds:
+  '@astryxdesign/core': true
   esbuild: true
   workerd: true
